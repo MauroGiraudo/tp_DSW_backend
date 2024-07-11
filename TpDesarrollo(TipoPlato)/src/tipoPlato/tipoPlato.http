@@ -1,0 +1,50 @@
+###  obteber todos los tipoPlato
+GET http://localhost:3000/api/characters
+
+
+
+###  obteber un tipoPlato
+GET http://localhost:3000/api/characters/fffros453od-sdasdd44-da453dad-3hdfdg33-dd6565d-dddd88
+
+
+
+### modificar un tipoPlato (PUT recurso completo e idempotente)
+PUT http://localhost:3000/api/characters/fffros453od-sdasdd44-da453dad-3hdfdg33-dd6565d-dddd88
+Content-Type: application/json
+{
+    "name": "De la Rua",
+    "characterClass": "el goat",
+    "level": "278",
+    "hp": "5000",
+    "mana": "4000",
+    "attack":"3000",
+     
+}
+
+### modificar un character (PATCH recurso parcial)
+PATCH  http://localhost:3000/api/characters/fffros453od-sdasdd44-da453dad-3hdfdg33-dd6565d-dddd88
+Content-Type: application/json
+{
+    "name": "De la Rua",
+    "characterClass": "La cabra",
+    "level": "278",
+    "hp": "500",
+    "attack":"300",
+     
+}
+
+### crear un nuevo character
+POST http://localhost:3000/api/characters
+Content-Type: application/json
+{
+    "name": "Peron",
+    "characterClass": "Dictador",
+    "level": "25",
+    "hp": "15000",
+    "mana": "4000",
+    "attack":"3000",
+    "items": "Fuerza armada",
+     
+}
+### borrar info
+DELETE http://localhost:3000/api/characters/fffros453od-sdasdd44-da453dad-3hdfdg33-dd6565d-dddd88

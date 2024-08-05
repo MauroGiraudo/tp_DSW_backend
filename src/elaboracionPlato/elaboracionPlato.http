@@ -1,0 +1,42 @@
+###Solicita la cantidad de los ingredientes de todos los platos
+
+GET http://localhost:3000/api/elaboracionesPlato
+
+###Solicita la cantidad de un ingrediente de un plato en particular utilizando ambos códigos
+
+GET http://localhost:3000/api/elaboracionesPlato/11.9
+
+###Ingresa una cantidad para un ingrediente y un plato en particular
+
+POST http://localhost:3000/api/elaboracionesPlato
+Content-Type: application/json
+
+{
+  "ingrediente": 1,
+  "plato": 3,
+  "cantidad": 10
+}
+
+###
+
+POST http://localhost:3000/api/elaboracionesPlato
+Content-Type: application/json
+
+{
+  "ingrediente": 4,
+  "plato": 2,
+  "cantidad": 1500
+}
+
+###Modifica la cantidad de un ingrediente respecto a un plato utilizando sus códigos
+
+PATCH http://localhost:3000/api/elaboracionesPlato/14.5
+Content-Type: application/json
+
+{
+  "cantidad": 100
+}
+
+###Elimina la cantidad de un ingrediente para un plato existente utilizando ambos códigos
+
+DELETE http://localhost:3000/api/elaboracionesPlato/12.1

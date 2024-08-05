@@ -1,6 +1,6 @@
 import { Entity, Property, OneToMany, Collection, Cascade } from "@mikro-orm/core";
 import { BaseClass } from "../shared/db/baseEntity.entity.js";
-import { Ingrediente } from "../ingrediente/ingrediente.entity.js";
+import { Ingrediente } from "./ingrediente.entity.js";
 
 @Entity()
 export class TipoIngrediente extends BaseClass{

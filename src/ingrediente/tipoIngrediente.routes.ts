@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import { /*sanitizeTipoIngrediente,*/ findAll, findOne, add, update, remove } from './tipoIngrediente.controler.js'
+import { /*sanitizeTipoIngrediente,*/ findAll, findOne, add, update, remove } from './tipoIngrediente.controller.js'
 
 export const tipoIngredienteRouter = Router()
 

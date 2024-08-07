@@ -1,4 +1,4 @@
-import { sanitizeIngrediente, findAll, findOne, add, update, remove } from './ingrediente.controler.js'
+import { sanitizeIngrediente, findAll, findOne, add, update, remove } from './ingrediente.controller.js'
 import { Router } from 'express'
 
 export const ingredienteRouter = Router()

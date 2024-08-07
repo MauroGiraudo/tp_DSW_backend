@@ -7,28 +7,28 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Entity, Property, ManyToOne } from '@mikro-orm/core';
-import { TipoIngrediente } from './tipoIngrediente.entity.js';
-import { BaseClass } from '../shared/db/baseEntity.entity.js';
-export let Ingrediente = class Ingrediente extends BaseClass {
+import { Entity, Property, OneToMany, Collection, Cascade } from "@mikro-orm/core";
+import { BaseClass } from "../shared/db/baseEntity.entity.js";
+import { Ingrediente } from "./ingrediente.entity.js";
+export let TipoIngrediente = class TipoIngrediente extends BaseClass {
+    constructor() {
+        super(...arguments);
+        this.ingredientes = new Collection(this);
+    }
 };
 __decorate([
-    Property(),
+    Property({ nullable: false, unique: true }),
     __metadata("design:type", String)
-], Ingrediente.prototype, "descIngre", void 0);
+], TipoIngrediente.prototype, "descTIngre", void 0);
 __decorate([
-    Property(),
-    __metadata("design:type", Number)
-], Ingrediente.prototype, "stockIngre", void 0);
+    Property({ nullable: false }),
+    __metadata("design:type", String)
+], TipoIngrediente.prototype, "unidadMedida", void 0);
 __decorate([
-    Property(),
-    __metadata("design:type", Number)
-], Ingrediente.prototype, "puntoDePedido", void 0);
-__decorate([
-    ManyToOne(() => TipoIngrediente, { nullable: false }),
+    OneToMany(() => Ingrediente, (ingrediente) => ingrediente.tipoIngrediente, { cascade: [Cascade.ALL] }),
     __metadata("design:type", Object)
-], Ingrediente.prototype, "tipoIngrediente", void 0);
-Ingrediente = __decorate([
+], TipoIngrediente.prototype, "ingredientes", void 0);
+TipoIngrediente = __decorate([
     Entity()
-], Ingrediente);
-//# sourceMappingURL=ingrediente.entity.js.map
+], TipoIngrediente);
+//# sourceMappingURL=tipoIngrediente.entity.js.map

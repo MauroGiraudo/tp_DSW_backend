@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { sanitizeElaboracionPlato, findAll, findOne, add, update, remove } from "./elaboracionPlato.controler.js";
+import { sanitizeElaboracionPlato, findAll, findOne, add, update, remove } from "./elaboracionPlato.controller.js";
 
 export const elaboracionPlatoRouter = Router()
 

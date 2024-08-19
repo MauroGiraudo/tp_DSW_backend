@@ -1,0 +1,49 @@
+
+### Solicita el total de tipos de ingrediente
+GET http://localhost:3000/api/ingredientes/tipos
+
+### Solicita un único tipo de ingrediente según su código
+
+GET http://localhost:3000/api/ingredientes/tipos/1
+
+### Ingresa un nuevo tipo de ingrediente
+
+POST http://localhost:3000/api/ingredientes/tipos
+Content-Type: application/json
+
+{
+  "descTIngre": "Queso",
+  "unidadMedida": "Gramos"
+}
+
+###
+
+POST http://localhost:3000/api/ingredientes/tipos
+Content-Type: application/json
+
+{
+  "descTIngre": "Carne",
+  "unidadMedida": "Gramos"
+}
+
+###
+POST http://localhost:3000/api/ingredientes/tipos
+Content-Type: application/json
+
+{
+  "descTIngre": "Verdura",
+  "unidadMedida": "Unidades"
+}
+
+### Modifica los atributos de un tipo de ingrediente
+
+PUT http://localhost:3000/api/ingredientes/tipos/5
+Content-Type: application/json
+
+{
+  "descTIngre": "Pasta",
+  "unidadMedida": "Gramos"
+}
+
+### Borra un tipo de ingrediente
+DELETE http://localhost:3000/api/ingredientes/tipos/3

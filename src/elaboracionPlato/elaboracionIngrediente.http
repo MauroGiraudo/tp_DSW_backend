@@ -1,0 +1,55 @@
+### Obtener todos los platos asociados a un ingrediente y sus cantidades
+
+GET http://localhost:3000/api/ingredientes/17/platos
+
+### Obtener la cantidad para un ingrediente y un plato
+
+GET http://localhost:3000/api/ingredientes/17/platos/3
+
+### Establecer una cantidad para un ingrediente dado un plato
+
+POST http://localhost:3000/api/ingredientes/11/platos
+Content-Type: application/json
+
+{
+  "plato": 4,
+  "fechaVigencia": "16-08-2024",
+  "cantidadNecesaria": 250
+}
+
+### IDEM
+
+POST http://localhost:3000/api/ingredientes/17/platos
+Content-Type: application/json
+
+{
+  "plato": 3,
+  "fechaVigencia": "2024-08-16",
+  "cantidadNecesaria": 100
+}
+
+### Modificar la cantidad de un ingrediente dado un plato
+
+PATCH http://localhost:3000/api/ingredientes/14/platos/4
+Content-Type: application/json
+
+{
+  "cantidadNecesaria": 325
+}
+
+### IDEM
+
+PATCH http://localhost:3000/api/ingredientes/17/platos/3
+Content-Type: application/json
+
+{
+  "cantidadNecesaria": 175
+}
+
+### Eliminar la cantidad asociada a un ingrediente y un plato
+
+DELETE http://localhost:3000/api/ingredientes/14/platos/4
+
+### IDEM
+
+DELETE http://localhost:3000/api/ingredientes/17/platos/3

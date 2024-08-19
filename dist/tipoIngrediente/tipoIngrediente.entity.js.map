@@ -1,1 +1,0 @@
-{"version":3,"file":"tipoIngrediente.entity.js","sourceRoot":"","sources":["../../src/tipoIngrediente/tipoIngrediente.entity.ts"],"names":[],"mappings":"AAAA,OAAO,MAAM,MAAM,aAAa,CAAA;AAEhC,MAAM,OAAO,eAAe;IAC1B,YACS,SAAS,MAAM,CAAC,UAAU,EAAE,EAC5B,WAAmB,EACnB,gBAAwB;QAFxB,WAAM,GAAN,MAAM,CAAsB;QAC5B,gBAAW,GAAX,WAAW,CAAQ;QACnB,qBAAgB,GAAhB,gBAAgB,CAAQ;IAC9B,CAAC;CACL"}

@@ -1,0 +1,44 @@
+### Solicita el total de tipos de plato
+GET http://localhost:3000/api/platos/tipos
+
+### Solicita un único tipo de plato según su código
+
+GET http://localhost:3000/api/platos/tipos/1
+
+### Ingresa un nuevo tipo de plato
+
+POST http://localhost:3000/api/platos/tipos
+Content-Type: application/json
+
+{
+  "descTPlato": "Pasta",
+}
+
+###
+
+POST http://localhost:3000/api/platos/tipos
+Content-Type: application/json
+
+{
+  "descTPlato": "Carne",
+}
+
+###
+POST http://localhost:3000/api/platos/tipos
+Content-Type: application/json
+
+{
+  "descTPlato": "Carne roja",
+}
+
+### Modifica los atributos de un tipo de plato
+
+PUT http://localhost:3000/api/platos/tipos/5
+Content-Type: application/json
+
+{
+  "descTPlato": "Carne Blanca",
+}
+
+### Borra un tipo de plato
+DELETE http://localhost:3000/api/platos/tipos/3

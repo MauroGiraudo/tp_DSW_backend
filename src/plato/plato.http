@@ -1,32 +1,42 @@
-###  obteber todos los characters
-GET http://localhost:3000/api/plato
+###Solicita todos los platos
 
-###  obteber un character
-GET http://localhost:3000/api/plato/b780c4c6-68c2-4177-2004-af0102a99d39
+GET http://localhost:3000/api/platos
 
+###Solicita un plato en particular utilizando su numero de plato
 
+GET http://localhost:3000/api/platos/3
 
-### modificar un character (PUT recurso completo e idempotente)
-PATCH  http://localhost:3000/api/plato/b780c4c6-68c2-4177-2004-af0102a99d39
+###Ingresa un nuevo plato
+
+POST http://localhost:3000/api/platos
 Content-Type: application/json
 
 {
-    "descripcion": "Fideos a la Bolonegsa",
-    "tiempo": 20
+  "descripcion": "Ñoquis con Salsa Bolognesa",
+  "tiempo": 20,
+  "tipoPlato": 5
 }
 
-### crear un nuevo character
-POST http://localhost:3000/api/plato
+###
+
+POST http://localhost:3000/api/platos
 Content-Type: application/json
-    
+
 {
-    "platoClass": {
-        "descripcion": "Plato Principal",
-        "id": "b780c4c6-68c2-4177-8371-af0102a66d39"
-    }, 
-    "descripcion": "Milanesa",
-    "tiempo": 35
+  "descripcion": "Milanesa napolitana",
+  "tiempo": 25,
+  "tipoPlato": 6
 }
 
-### borrar info
-DELETE http://localhost:3000/api/plato/0ec6ee25-e2dd-481c-8cc8-b4aa5dc83e96
+###Modifica la descripción de un plato ya ingresado utilizando su código
+
+PATCH http://localhost:3000/api/platos/3
+Content-Type: application/json
+
+{
+  "descripcion": "Ñoquis con Salsa Bolognesa"
+}
+
+###Elimina un plato existente utilizando su código
+
+DELETE http://localhost:3000/api/platos/12

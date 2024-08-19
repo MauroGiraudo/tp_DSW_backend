@@ -1,10 +1,10 @@
-import { sanitizeIngrediente, findAll, findOne, add, update, remove } from './ingrediente.controler.js';
+import { sanitizeIngrediente, findAll, findOne, add, update, remove } from './ingrediente.controller.js';
 import { Router } from 'express';
 export const ingredienteRouter = Router();
 ingredienteRouter.get('/', findAll);
-ingredienteRouter.get('/:codIngrediente', findOne);
+ingredienteRouter.get('/:cod', findOne);
 ingredienteRouter.post('/', sanitizeIngrediente, add);
-ingredienteRouter.put('/:codIngrediente', sanitizeIngrediente, update);
-ingredienteRouter.patch('/:codIngrediente', sanitizeIngrediente, update);
-ingredienteRouter.delete('/:codIngrediente', remove);
+ingredienteRouter.put('/:cod', sanitizeIngrediente, update);
+ingredienteRouter.patch('/:cod', sanitizeIngrediente, update);
+ingredienteRouter.delete('/:cod', remove);
 //# sourceMappingURL=ingrediente.routes.js.map

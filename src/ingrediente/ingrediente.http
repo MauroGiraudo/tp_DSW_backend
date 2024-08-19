@@ -5,7 +5,7 @@ GET http://localhost:3000/api/ingredientes
 
 ###Solicita un ingrediente en particular utilizando su código
 
-GET http://localhost:3000/api/ingredientes/b780c456-68s2-4177-5371-af0102199j38
+GET http://localhost:3000/api/ingredientes/13
 
 ###Ingresa un nuevo ingrediente
 
@@ -13,24 +13,33 @@ POST http://localhost:3000/api/ingredientes
 Content-Type: application/json
 
 {
-  "descIngrediente": "Papa",
-  "stockIngrediente": 125,
-  "puntoPedido": 40,
-  "tipoIngrediente": {
-    "codigo": "b780c4c6-68c2-4177-8371-af0102a99d38", 
-    "descripcion": "Verdura",
-    "medicionCantidad": "Gramos"}
+  "descIngre": "Queso Cremoso",
+  "stockIngre": 20000,
+  "puntoDePedido": 7500,
+  "tipoIngrediente": 8
+}
+
+###
+
+POST http://localhost:3000/api/ingredientes
+Content-Type: application/json
+
+{
+  "descIngre": "Pechuga de Pollo",
+  "stockIngre": 12000,
+  "puntoDePedido": 2000,
+  "tipoIngrediente": 6
 }
 
 ###Modifica la descripción de un ingrediente ya ingresado utilizando su código
 
-PATCH http://localhost:3000/api/ingredientes/b780c456-68s2-4177-5371-af0102199j38
+PATCH http://localhost:3000/api/ingredientes/17
 Content-Type: application/json
 
 {
-  "descIngrediente": "Calabaza Escocesa"
+  "descIngre": "Queso Parmesano"
 }
 
 ###Elimina un ingrediente existente utilizando su código
 
-DELETE http://localhost:3000/api/ingredientes/b780c456-68s2-4177-5371-af0102199j38
+DELETE http://localhost:3000/api/ingredientes/15

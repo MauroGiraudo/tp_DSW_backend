@@ -1,49 +1,55 @@
-### FINDALL
+### Obtener todos los ingredientes y sus cantidades de un plato
 
-GET http://localhost:3000/api/elaboracionesPlato
+GET http://localhost:3000/api/platos/4/ingredientes
 
-### FINDONE
+### Obtener la cantidad para un ingrediente y un plato
 
-GET http://localhost:3000/api/elaboracionesPlato/b780c456-68s2-4177-5371-af0102199j38.b780c4c6-68c2-4177-2004-af0102a99d39
+GET http://localhost:3000/api/platos/3/ingredientes/13
 
-### ADD
+### Establecer una cantidad para un ingrediente dado un plato
 
-POST http://localhost:3000/api/elaboracionesPlato
+POST http://localhost:3000/api/platos/3/ingredientes
 Content-Type: application/json
 
 {
-  "ingrediente": {
-    "codIngrediente": "b780c456-12s2-b177-5371-af0v02199f58",
-    "descIngrediente": "Frutilla",
-    "stockIngrediente": 75,
-    "puntoPedido": 25,
-    "tipoIngrediente": {
-      "codigo": "b780c4c6-55c2-4177-8371-af0102a99d38",
-      "descripcion": "Fruta",
-      "medicionCantidad": "Gramos"
-    }
-  },
-  "plato": {
-    "nro": "b780c4c6-68c2-4177-2003-afh102a49e39",
-    "platoClass": {
-      "descripcion": "Postre",
-      "id": "b780c4f8-68g1-4177-8371-af0102a66d39"
-    },
-    "descripcion": "Torta",
-    "tiempo": 60
-  },
-  "cantIngreNecesaria": 375
+  "ingrediente": 13,
+  "fechaVigencia": "16-08-2024",
+  "cantidadNecesaria": 250
 }
 
-### PATCH
+### IDEM
 
-PATCH http://localhost:3000/api/elaboracionesPlato/b780c456-68s2-4177-5371-af0102199j38.b780c4c6-68c2-4177-2004-af0102a99d39
+POST http://localhost:3000/api/platos/4/ingredientes
 Content-Type: application/json
 
 {
-  "cantIngreNecesaria": 450
+  "ingrediente": 17,
+  "fechaVigencia": "2024-08-16",
+  "cantidadNecesaria": 250
 }
 
-### DELETE
+### Modificar la cantidad de un ingrediente dado un plato
 
-DELETE http://localhost:3000/api/elaboracionesPlato/b780c456-12s2-b177-5371-af0v02199f58.b780c4c6-68c2-4177-2003-afh102a49e39
+PATCH http://localhost:3000/api/platos/3/ingredientes/13
+Content-Type: application/json
+
+{
+  "cantidadNecesaria": 1000
+}
+
+### IDEM
+
+PATCH http://localhost:3000/api/platos/4/ingredientes/14
+Content-Type: application/json
+
+{
+  "CantidadNecesaria": 750
+}
+
+### Eliminar la cantidad asociada a un ingrediente y un plato
+
+DELETE http://localhost:3000/api/platos/3/ingredientes/13
+
+### IDEM
+
+DELETE http://localhost:3000/api/platos/4/ingredientes/17

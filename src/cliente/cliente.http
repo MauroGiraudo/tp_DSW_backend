@@ -1,39 +1,44 @@
-### OBTENER TODOS LOS CLIENTES #
-GET http://localhost:3000/api/cliente
+###Solicita todos los clientes
 
-### OBTENER UN CLIENTE #
-GET http://localhost:3000/api/cliente/d0c48218-7b5b-4796-8569-a6b24e638e9f
+GET http://localhost:3000/api/clientes
 
-### NUEVO CLIENTE #
-POST http://localhost:3000/api/cliente 
+###Solicita un cliente en particular utilizando su id
+
+GET http://localhost:3000/api/clientes/11
+
+###Ingresa un nuevo cliente
+
+POST http://localhost:3000/api/clientes
 Content-Type: application/json
 
 {
-  "nombre": "Jose",
+  "nombre": "Jorge",
   "apellido": "Kralje",
-  "mail": "jose@gmail.com",
-  "telefono": 3462670754
+  "mail": "Jorege@gmail.com",
+  "telefono": 132154154,
 }
 
-### MODIFICAR CLIENTE (PUT) #
-PUT http://localhost:3000/api/cliente/d0c48218-7b5b-4796-8569-a6b24e638e9f
+###
+
+POST http://localhost:3000/api/clientes
 Content-Type: application/json
 
 {
-    "nombre": "Alejandro",
-    "apellido":"Pasto",
-    "mail":"alejandropasto@gmail.com",
-    "telefono": 3462767035
+  "nombre": "Levi",
+  "apellido": "Ackerman",
+  "mail": "Levi@gmail.com",
+  "telefono": 132154154,
 }
 
-### MODIFICAR CLIENTE (PATCH) #
-PATCH http://localhost:3000/api/cliente/d0c48218-7b5b-4796-8569-a6b24e638e9f
+###Modifica el mail de un cliente ya ingresado utilizando su código
+
+PATCH http://localhost:3000/api/clientes/14
 Content-Type: application/json
 
 {
-    "mail": "alejandropastoo@gmail.com",
-    "telefono": 3462767035
+  "mail": "Ackerman@gmail.com"
 }
 
-### BORRAR CLIENTE #
-DELETE http://localhost:3000/api/cliente/d0c48218-7b5b-4796-8569-a6b24e638e9f
+###Elimina un cliente existente utilizando su código
+
+DELETE http://localhost:3000/api/platos/12

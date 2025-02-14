@@ -28,3 +28,11 @@ export class PagoPreconditionFailed extends Error {
   }
 }
 
+export class PagoAlreadyExists extends Error {
+  type: string
+  constructor(message: string = 'El pago ya ha sido registrado') {
+    super(message)
+    this.type = 'PagoAlreadyExists'
+  }
+}
+

@@ -3,12 +3,12 @@ import { Pago } from "./pago.entity.js"
 import { orm } from "../../shared/db/orm.js"
 import { Pedido } from "../pedido.entity.js"
 import { PedidoNotFoundError } from "../../shared/errors/entityErrors/pedido.errors.js"
-import { PagoNotFoundError, PagoPreconditionFailed } from "../../shared/errors/entityErrors/pago.errors.js"
+import { PagoAlreadyExists, PagoNotFoundError, PagoPreconditionFailed } from "../../shared/errors/entityErrors/pago.errors.js"
 import { handleErrors } from "../../shared/errors/errorHandler.js"
 import crypto from "node:crypto"
 import { validarPago } from "./pago.schema.js"
 import { TarjetaCliente } from "../../tarjetaCliente/tarjetaCliente.entity.js"
-import { TarjetaClienteNotFoundError } from "../../shared/errors/entityErrors/tarjetaCliente.errors.js"
+import { TarjetaClienteErronea, TarjetaClienteNotFoundError, TarjetaClienteVencida } from "../../shared/errors/entityErrors/tarjetaCliente.errors.js"
 
 const em = orm.em
 
@@ -16,21 +16,22 @@ async function sanitizePagoInput(req:Request, res:Response, next:NextFunction){
   req.body.sanitizedInput = {
     pedido: req.params.nroPed,
     idPago: req.body.idPago,
-    fechaPago: req.body.fechaPago,
-    horaPago: req.body.horaPago,
+    //fechaPago: req.body.fechaPago,
+    //horaPago: req.body.horaPago,
+    fechaPago: (new Date()).toISOString().split('T')[0],
+    horaPago: (new Date()).toTimeString().split(' ')[0],
     importe: req.body.importe,
     tarjetaCliente: req.body.tarjetaCliente
   }
 
-  /*Object.keys(req.body.sanitizedInput).forEach(key => {
+  Object.keys(req.body.sanitizedInput).forEach(key => {
     if(req.body.sanitizedInput [key] === undefined){
       delete req.body.sanitizedInput [key]
     }
-  })*/
+  })
   next()
 }
 
-//Modificar el método para sólo tome el nroPed y, con eso, identifique el pago. La ruta será '/:nroPed/pago'
 async function findOne(req:Request,res:Response) {
   try{
     const nroPed = Number.parseInt(req.params.nroPed)
@@ -46,6 +47,11 @@ async function findOne(req:Request,res:Response) {
 function validarEntregaDeElementos(pedido: Pedido): void {
   pedido.platosPedido.getItems().forEach((platoPedido) => {
     if(platoPedido.entregado === false) {
+      throw new PagoPreconditionFailed
+    }
+  })
+  pedido.bebidasPedido.getItems().forEach((bebidaPedido) => {
+    if(bebidaPedido.entregado === false) {
       throw new PagoPreconditionFailed
     }
   })
@@ -66,14 +72,26 @@ function calcularImporte(pedido: Pedido, totalPlatos: number = 0, totalBebidas: 
 async function add(req:Request,res:Response) {
   try{
     const nroPed = Number.parseInt(req.params.nroPed)
-    const pedido = await em.findOneOrFail(Pedido, {nroPed}, {populate: ['platosPedido.plato', 'bebidasPedido.bebida'], failHandler: () => {throw new PedidoNotFoundError}})
-    validarEntregaDeElementos(pedido) // Si bien considero que no es correcto, el pago no se podrá realizar hasta que todos los productos hayan sido entregados.
+    const pedido = await em.findOneOrFail(Pedido, {nroPed}, {populate: ['platosPedido.plato', 'bebidasPedido.bebida', 'cliente'], failHandler: () => {throw new PedidoNotFoundError}})
+    const pagoExistente = await em.findOne(Pago, {pedido})
+    if(pagoExistente) {
+      throw new PagoAlreadyExists()
+    }
+    validarEntregaDeElementos(pedido) // El pago no se podrá realizar hasta que todos los productos hayan sido entregados.
     req.body.sanitizedInput.pedido = await em.findOneOrFail(Pedido, {nroPed}, {failHandler: () => {throw new PedidoNotFoundError}})
     req.body.sanitizedInput.idPago = crypto.randomUUID()
     req.body.sanitizedInput.importe = calcularImporte(pedido)
+    console.log(req.body.sanitizedInput)
+    console.log(req.body.sanitizedInput.tarjetaCliente)
     req.body.sanitizedInput.tarjetaCliente = await em.findOneOrFail(TarjetaCliente, {idTarjeta: req.body.tarjetaCliente}, {failHandler: () => {throw new TarjetaClienteNotFoundError}})
-    const pagoValido = validarPago(req.body.sanitizedInput)
-    const pago = em.create(Pago, pagoValido)
+    if(req.body.sanitizedInput.tarjetaCliente.vencimiento < new Date()) {
+      throw new TarjetaClienteVencida()
+    }
+    if(req.body.sanitizedInput.tarjetaCliente.cliente !== pedido.cliente) {
+      throw new TarjetaClienteErronea()
+    }
+    validarPago(req.body.sanitizedInput)
+    const pago = em.create(Pago, req.body.sanitizedInput)
     await em.flush()
     res.status(201).json({data: pago})
   } catch (error:any){

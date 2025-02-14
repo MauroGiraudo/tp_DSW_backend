@@ -33,3 +33,19 @@ export class TarjetaClienteUniqueConstraintViolation extends Error {
     this.type = 'TarjetaClienteUniqueConstraintViolation'
   }
 } 
+
+export class TarjetaClienteVencida extends Error {
+  type: string
+  constructor(message: string = 'La tarjeta ingresada se encuentra vencida') {
+    super(message);
+    this.type = 'TarjetaClientePreconditionFailed'
+  }
+}
+
+export class TarjetaClienteErronea extends Error {
+  type: string
+  constructor(message: string = 'La tarjeta ingresada no corresponde al cliente') {
+    super(message)
+    this.type = 'TarjetaClienteErronea'
+  }
+}

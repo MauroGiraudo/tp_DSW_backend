@@ -4,7 +4,7 @@ GET http://localhost:3000/api/pedidos/34/pagos
 
 ### Crea el pago del pedido
 
-POST http://localhost:3000/api/pedidos/34/pagos
+POST http://localhost:3000/api/pedidos/36/pagos
 Content-Type: application/json
 
 {
